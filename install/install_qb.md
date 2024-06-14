@@ -1,0 +1,2 @@
+qb-core -> shared -> items.lua
+hacking_device = { name = 'hacking_device', label = 'Hacking Device', weight = 150, type = 'item', image = 'hacking_device.png', unique = false, useable = false, shouldClose = true, combinable = true, description = '' },
