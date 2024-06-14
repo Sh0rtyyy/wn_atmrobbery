@@ -1,4 +1,5 @@
 main = {}
+lib.locale()
 
 lib.callback.register('wn_atmrobbery:getCops', function()
     local src = source
@@ -36,7 +37,7 @@ AddEventHandler("wn_atmrobbery:syncPlant", function(objectId)
     local src = source
     if CheckDistance(source, objectId) then
         if main[objectId] and main[objectId].taken then
-            TriggerClientEvent('wn_houserobbery:notifysv', src, "error", "ATM", "This ATM is allready robbed", "fa-solid fa-user-shield", 5000)
+            TriggerClientEvent('wn_houserobbery:notifysv', src, "error", locale('atm'), locale('atm_robbed'), "fa-solid fa-user-shield", 5000)
         else
             TriggerEvent('wn_atmrobbery:takeCash', objectId, src)
         end
@@ -53,7 +54,7 @@ AddEventHandler("wn_atmrobbery:takeCash", function(objectId, source)
     end
 
     if main[objectId].taken then
-        TriggerClientEvent('wn_houserobbery:notifysv', src, "error", "ATM", "This ATM is allready robbed", "fa-solid fa-user-shield", 5000)
+        TriggerClientEvent('wn_houserobbery:notifysv', src, "error", locale('atm'), locale('atm_robbed'), "fa-solid fa-user-shield", 5000)
     else
         local money = math.floor(Config.Reward)
         DiscordLog("ATM ROBBERY", GetPlayerName(src) .. " have robbed the ATM at " .. objectId .. " and get " .. money)

@@ -1,0 +1,11 @@
+{
+    "atm": "ATM Robbery",
+    "no_hacking_device": "You dont have a hackingdevice",
+    "atm_robbed": "This ATM is allready robbed",
+    "robbing_atm": "You are taking money",
+    "failed_hacking": "You failed the hack",
+    "no_cops": "Not enought cops",
+    "target": "Rob ATM",
+
+    "test": "test"
+}

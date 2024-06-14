@@ -1,3 +1,5 @@
+lib.locale()
+
 RegisterNetEvent('wn_atmrobbery:int',function()
     for k, model in pairs(Config.Props) do
         if Config.Target == "ox_target" then
@@ -6,7 +8,7 @@ RegisterNetEvent('wn_atmrobbery:int',function()
                     event = 'wn_atmrobbery:rob',
                     name = 'rob_atm',
                     icon = "fas fa-money-bill",
-                    label = 'Rob ATM',
+                    label = locale('target'),
                     onSelect = function()
                         TriggerEvent('wn_atmrobbery:rob')
                     end,
@@ -20,7 +22,7 @@ RegisterNetEvent('wn_atmrobbery:int',function()
                         event = 'wn_atmrobbery:rob',
                         type = 'client',
                         icon = "fa-solid fa-money-bill",
-                        label = 'Rob',
+                        label = locale('target'),
                     },
                 },
                 distance = 2.5
@@ -44,11 +46,11 @@ RegisterNetEvent('wn_atmrobbery:rob',function()
                 local result = lib.callback.await('wn_atmrobbery:getCooldons', false, entpos)
                 local hasItem = lib.callback('wn_atmrobbery:getItem')
                 if not hasItem then
-                    Notify("error", "ATM", "You dont have a hackingdevice", "fa-solid fa-user-shield", 5000)
+                    Notify("error", locale('atm'), locale('no_hacking_device'), "fa-solid fa-user-shield", 5000)
                     return
                 end
-                    if result then
-                    Notify("error", "ATM", "This ATM is allready robbed", "fa-solid fa-user-shield", 5000)
+                if result then
+                    Notify("error", locale('atm'), locale('atm_robbed'), "fa-solid fa-user-shield", 5000)
                     return
                 else
                     Dispatch(entpos)
@@ -56,12 +58,12 @@ RegisterNetEvent('wn_atmrobbery:rob',function()
                     clip = 'hotwire'
                     RequestAnimDict(dict)
                     while (not HasAnimDictLoaded(dict)) do Wait(0) end
-                    TaskPlayAnim(cache.ped, dict, clip, 3.0, 1.0, -1, 49, 0, false, false, false)
+                    TaskPlayAnim(ped, dict, clip, 3.0, 1.0, -1, 49, 0, false, false, false)
                     exports["ethicalpixel-hackingdevice"]:hackingdevice(function(success)
                         if success then
                             if lib.progressCircle({
                                 duration = Config.SearchDuration,
-                                label = "Planting the Explosive",
+                                label = locale('robbing_atm'),
                                 position = 'bottom',
                                 useWhileDead = false,
                                 canCancel = true,
@@ -82,8 +84,8 @@ RegisterNetEvent('wn_atmrobbery:rob',function()
                                 StopAnimTask(ped, "anim@scripted@heist@ig1_table_grab@gold@male@", "grab", 1.0)
                             end
                         else
-                            StopAnimTask(cache.ped, "anim@gangops@facility@servers@", "hotwire", 1.0)
-                            Notify("error", "ATM", "You failed the hack", "fa-solid fa-user-shield", 5000)
+                            StopAnimTask(ped, "anim@gangops@facility@servers@", "hotwire", 1.0)
+                            Notify("error", locale('atm'), locale('failed_hacking'), "fa-solid fa-user-shield", 5000)
                         end
                     end, Config.HackingMinigames[math.random(1, #Config.HackingMinigames)], 30, 0)
                 end
@@ -93,6 +95,6 @@ RegisterNetEvent('wn_atmrobbery:rob',function()
             end
         end
     else
-        Notify("error", "ATM", "Not enought cops", "fa-solid fa-user-shield", 5000)
+        Notify("error", locale('atm'), locale('no_cops'), "fa-solid fa-user-shield", 5000)
     end
 end)

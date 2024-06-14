@@ -1,6 +1,4 @@
-local webhook = "https://discord.com/api/webhooks/1250184705182007419/aoG7RN98Z52JYIVZ5jI2DyQO_2Upv1GqisucTEC2v52A-1Gp-8zlWzUJiXqRuXTag1T7"
-local instances = {}
-local instanceIndex = 0
+local webhook = ""
 
 if Config.Framework == "ESX" then
     ESX = exports["es_extended"]:getSharedObject()
@@ -193,5 +191,9 @@ function DiscordLog(name,message,color)
         }
     }
 
-    PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({ username = name, embeds = embeds }), { ['Content-Type'] = 'application/json' })
+    if webhook == "" or webhook == nil then
+        print("^1 ERROR: Set-up your discord webhook ! ^7")
+    else
+        PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({ username = name, embeds = embeds }), { ['Content-Type'] = 'application/json' })
+    end
 end
