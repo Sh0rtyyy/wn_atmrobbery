@@ -44,15 +44,12 @@ RegisterNetEvent('wn_atmrobbery:rob',function()
                 NetworkRegisterEntityAsNetworked(objectId)
                 local entpos = GetEntityCoords(objectId)
                 local result = lib.callback.await('wn_atmrobbery:getCooldons', false, entpos)
-                local hasItem = lib.callback('wn_atmrobbery:getItem')
-                if not hasItem then
-                    Notify("error", locale('atm'), locale('no_hacking_device'), "fa-solid fa-user-shield", 5000)
-                    return
-                end
                 if result then
                     Notify("error", locale('atm'), locale('atm_robbed'), "fa-solid fa-user-shield", 5000)
                     return
-                else
+                end
+                local hasItem = lib.callback('wn_atmrobbery:getItem')
+                if hasItem then
                     Dispatch(entpos)
                     dict = 'anim@gangops@facility@servers@'
                     clip = 'hotwire'
@@ -88,6 +85,9 @@ RegisterNetEvent('wn_atmrobbery:rob',function()
                             Notify("error", locale('atm'), locale('failed_hacking'), "fa-solid fa-user-shield", 5000)
                         end
                     end, Config.HackingMinigames[math.random(1, #Config.HackingMinigames)], 30, 0)
+                else
+                    Notify("error", locale('atm'), locale('no_hacking_device'), "fa-solid fa-user-shield", 5000)
+                    return
                 end
             end
             if objectId ~= 0 or objctId ~= nil then
