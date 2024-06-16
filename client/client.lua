@@ -56,8 +56,9 @@ RegisterNetEvent('wn_atmrobbery:rob',function()
                     RequestAnimDict(dict)
                     while (not HasAnimDictLoaded(dict)) do Wait(0) end
                     TaskPlayAnim(ped, dict, clip, 3.0, 1.0, -1, 49, 0, false, false, false)
-                    exports["ethicalpixel-hackingdevice"]:hackingdevice(function(success)
-                        if success then
+
+                    TriggerEvent('ultra-voltlab', 60, function(result, reason)
+                        if result == 1 then
                             if lib.progressCircle({
                                 duration = Config.SearchDuration,
                                 label = locale('robbing_atm'),
@@ -84,7 +85,7 @@ RegisterNetEvent('wn_atmrobbery:rob',function()
                             StopAnimTask(ped, "anim@gangops@facility@servers@", "hotwire", 1.0)
                             Notify("error", locale('atm'), locale('failed_hacking'), "fa-solid fa-user-shield", 5000)
                         end
-                    end, Config.HackingMinigames[math.random(1, #Config.HackingMinigames)], 30, 0)
+                    end)
                 else
                     Notify("error", locale('atm'), locale('no_hacking_device'), "fa-solid fa-user-shield", 5000)
                     return
