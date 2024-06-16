@@ -109,7 +109,7 @@ function Dispatch(coords)
             flash = 0,
             unique_id = tostring(math.random(0000000, 9999999)),
             blip = {
-                sprite = 40,
+                sprite = 500,
                 scale = 1.2,
                 colour = 1,
                 flashes = false,
@@ -129,7 +129,7 @@ function Dispatch(coords)
             dispatchCode = "10-90",
             description = "Somebody here is hacking an ATM !",
             radius = 0,
-            sprite = 40,
+            sprite = 500,
             color = 1,
             scale = 1.2,
             length = 3,
@@ -150,7 +150,7 @@ function Dispatch(coords)
             image = "URL", -- Url for image to attach to the call
             --you can use the getSSURL export to get this url
             blip = {
-                sprite = 40,
+                sprite = 500,
                 scale = 1.2,
                 colour = 1,
                 flashes = false, -- blip flashes
